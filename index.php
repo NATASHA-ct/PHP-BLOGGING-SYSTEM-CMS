@@ -86,9 +86,10 @@ include "includes/db.php";
             die("QUERY FAILED" . mysqli_error($connect));
         }
 
-        // count the number of rows returned
+        // count the number of rows returned/ rows is data in DB
         $count = mysqli_num_rows($search_query);
 
+        // check if the count is 0
         if($count == 0){
             echo "<h1>NO POST WITH SUCH TITLE</h1>";
         }else{
