@@ -37,7 +37,7 @@ include "includes/db.php";
 
         echo "<hr>";
 
-        echo "<img class='img-responsive' src='images/{$post_image}' alt=''>";
+        echo "<img class='img-responsive' src='images/{$post_image}' alt='post image' style='height:25rem; width:100%'>";
 
         echo "<hr>";
 
@@ -68,8 +68,45 @@ include "includes/db.php";
         echo "<li><a href='#'>{$cat_title}</a></li>";
     }
     
+
+    // catch data from the search
+    if(isset($_POST['search'])){
+
+        // value entered in the search input
+       echo $search = $_POST['search'];
+
+        // query to search for the title entered by user
+        $sql = "SELECT * FROM `posts` WHERE post_title LIKE '%$search%'";
+
+        // run the query
+        $search_query = mysqli_query($connect, $sql);
+
+        // check if the query is working
+        if(!$search_query){
+            die("QUERY FAILED" . mysqli_error($connect));
+        }
+
+        // count the number of rows returned
+        $count = mysqli_num_rows($search_query);
+
+        if($count == 0){
+            echo "<h1>NO POST WITH SUCH TITLE</h1>";
+        }else{
+            echo "<h1>RESULTS FOUND</h1>";
+        }
+    }
     ?>
     </div>
+
+    <!-- search for an item -->
+     <form action="" method="post">
+            <input name="search" type="text" placeholder="Enter post title">
+            <button type="submit">SEARCH</button>
+        </form>
+    
+   
+
+
 
 <?php
 include "includes/footer.php";
