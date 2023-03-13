@@ -55,7 +55,8 @@ include "includes/db.php";
 </div>
  <div>
     <?php 
-    $sql = "SELECT * FROM `categories`";
+    // get data from the database LIMIT REDUCES THEM TO ONLY 2 AT A TIME
+    $sql = "SELECT * FROM `categories` LIMIT 2";
 
     $select_all_cats = mysqli_query($connect, $sql);
    
